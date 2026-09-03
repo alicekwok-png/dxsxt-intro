@@ -1,75 +1,77 @@
 #!/usr/bin/env python3
-"""Render the web-app icon set (assets/icons/) from the De Stijl mark.
+"""Render the web-app icon set (assets/icons/) from the official De Stijl logo.
 
-The mark is a Mondrian-style composition of thin rules, dark bars and
-red / yellow / blue blocks, so it is drawn here as vector geometry (also
-written out as assets/icons/source-mark.svg) and rasterised with Pillow.
-Coordinates were measured from the official 1920x1920 logo artwork.
+Source: assets/logo/destijl_logo.png (the full "de stijl · Technology Network
+int'l · 形品科技" artwork on white). Only the geometric mark on the left is
+used for icons — the wordmark is unreadable at icon sizes. The mark is
+located automatically as the left-most block of non-white columns.
 
 Usage:  python3 tools/render_icons.py     (needs Pillow; build.py does not)
 """
 from pathlib import Path
-from PIL import Image, ImageDraw
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
+LOGO = ROOT / "assets" / "logo" / "destijl_logo.png"
+MARK = ROOT / "assets" / "logo" / "destijl_mark.png"
 OUT = ROOT / "assets" / "icons"
 OUT.mkdir(parents=True, exist_ok=True)
-
-DARK, RED, YELLOW, BLUE, WHITE = "#3b3336", "#e8424b", "#f2c22e", "#4fb0ea", "#ffffff"
-THIN = 6  # rule thickness in artwork units
-
-# (x0, y0, x1, y1, colour) in the 1920-unit artwork space
-SHAPES = [
-    (395 - THIN / 2, 515, 395 + THIN / 2, 985, DARK),       # thin vertical rule, left
-    (518 - THIN / 2, 625, 518 + THIN / 2, 1325, DARK),      # thin vertical rule, centre
-    (168, 1108 - THIN / 2, 710, 1108 + THIN / 2, DARK),     # thin horizontal rule
-    (250, 858, 515, 858 + THIN, DARK),                      # outline box: top
-    (250, 985 - THIN, 515, 985, DARK),                      # outline box: bottom
-    (250, 858, 250 + THIN, 985, DARK),                      # outline box: left
-    (253, 892, 356, 983, RED),                              # red block
-    (395, 665, 443, 985, DARK),                             # dark vertical bar
-    (518, 858, 710, 930, DARK),                             # dark horizontal bar, right
-    (521, 933, 585, 1105, YELLOW),                          # yellow block
-    (330, 1045, 518, 1105, DARK),                           # dark horizontal bar, left
-    (428, 1111, 515, 1195, BLUE),                           # blue block
-]
-BBOX = (168, 515, 710, 1325)  # extent of the mark
-
-# ---- SVG source for reference / future re-renders ----
-svg = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="%d %d %d %d">' % (
-    BBOX[0], BBOX[1], BBOX[2] - BBOX[0], BBOX[3] - BBOX[1])]
-for x0, y0, x1, y1, c in SHAPES:
-    svg.append('  <rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="%s"/>' % (x0, y0, x1 - x0, y1 - y0, c))
-svg.append("</svg>")
-(OUT / "source-mark.svg").write_text("\n".join(svg) + "\n", encoding="utf-8")
-
-SS = 4  # supersampling factor
+WHITE = (255, 255, 255)
 
 
-def render(size, pad_frac, path, bg=WHITE):
-    """Draw the mark centred on a size x size canvas with pad_frac padding."""
-    big = size * SS
-    mode = "RGBA" if bg is None else "RGB"
-    im = Image.new(mode, (big, big), (0, 0, 0, 0) if bg is None else bg)
-    d = ImageDraw.Draw(im)
-    bw, bh = BBOX[2] - BBOX[0], BBOX[3] - BBOX[1]
-    inner = big * (1 - 2 * pad_frac)
-    s = inner / max(bw, bh)
-    ox = (big - bw * s) / 2 - BBOX[0] * s
-    oy = (big - bh * s) / 2 - BBOX[1] * s
-    for x0, y0, x1, y1, c in SHAPES:
-        d.rectangle([x0 * s + ox, y0 * s + oy, x1 * s + ox, y1 * s + oy], fill=c)
-    im = im.resize((size, size), Image.LANCZOS)
-    im.save(path, optimize=True)
-    print(path.relative_to(ROOT), im.size)
-    return im
+def is_ink(px):  # anything clearly darker / more saturated than paper
+    return sum(px) < 720
 
 
-render(180, 0.12, OUT / "apple-touch-icon.png")
-render(192, 0.12, OUT / "icon-192.png")
-icon512 = render(512, 0.12, OUT / "icon-512.png")
-render(512, 0.22, OUT / "icon-512-maskable.png")
-render(32, 0.04, OUT / "favicon-32.png", bg=None)
-render(16, 0.02, OUT / "favicon-16.png", bg=None)
+def crop_mark(logo: Image.Image) -> Image.Image:
+    """Return the left-most connected block of content (the geometric mark)."""
+    rgb = logo.convert("RGB")
+    w, h = rgb.size
+    px = rgb.load()
+    col_has_ink = [any(is_ink(px[x, y]) for y in range(h)) for x in range(w)]
+    x0 = col_has_ink.index(True)
+    x1 = x0
+    gap = 0
+    while x1 < w - 1 and gap < 20:          # stop at the first clear gap (>20px)
+        x1 += 1
+        gap = 0 if col_has_ink[x1] else gap + 1
+    x1 -= gap
+    rows = [y for y in range(h) if any(is_ink(px[x, y]) for x in range(x0, x1 + 1))]
+    return rgb.crop((x0, min(rows), x1 + 1, max(rows) + 1))
+
+
+def render(mark, size, pad_frac, path, transparent=False):
+    inner = int(round(size * (1 - 2 * pad_frac)))
+    w, h = mark.size
+    s = inner / max(w, h)
+    m = mark.resize((max(1, round(w * s)), max(1, round(h * s))), Image.LANCZOS)
+    if transparent:
+        m = m.convert("RGBA")
+        # turn paper white into alpha so favicons sit cleanly on dark tabs
+        pm = m.load()
+        for y in range(m.height):
+            for x in range(m.width):
+                r, g, b, _ = pm[x, y]
+                pm[x, y] = (r, g, b, 0 if (r + g + b) > 735 else 255)
+        canvas = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+        canvas.alpha_composite(m, ((size - m.width) // 2, (size - m.height) // 2))
+    else:
+        canvas = Image.new("RGB", (size, size), WHITE)
+        canvas.paste(m, ((size - m.width) // 2, (size - m.height) // 2))
+    canvas.save(path, optimize=True)
+    print(path.relative_to(ROOT), canvas.size)
+    return canvas
+
+
+mark = crop_mark(Image.open(LOGO))
+mark.save(MARK, optimize=True)
+print(MARK.relative_to(ROOT), mark.size)
+
+render(mark, 180, 0.12, OUT / "apple-touch-icon.png")
+render(mark, 192, 0.12, OUT / "icon-192.png")
+icon512 = render(mark, 512, 0.12, OUT / "icon-512.png")
+render(mark, 512, 0.22, OUT / "icon-512-maskable.png")
+render(mark, 32, 0.04, OUT / "favicon-32.png", transparent=True)
+render(mark, 16, 0.02, OUT / "favicon-16.png", transparent=True)
 icon512.save(OUT / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48)])
 print("assets/icons/favicon.ico")

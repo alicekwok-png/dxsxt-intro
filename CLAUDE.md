@@ -15,10 +15,11 @@
 │   ├── hero.jpg / roadmap.jpg          （原 PDF 抽出嘅 AI 渲染圖）
 │   ├── pillar.jpg / bank.jpg / engine.jpg / contract.jpg   （之後生成補充嘅機制配圖）
 │   ├── logo/mark_crop.png / logo/wordmark_white_crop.png   （官方 logo，已去透明邊）
+│   ├── logo/destijl_logo.png / destijl_mark.png   （De Stijl「形品科技」官方 logo 原圖，
+│   │                           同由佢自動裁出嘅左邊幾何 mark；mark 係 render_icons.py 生成）
 │   └── icons/                （web app icon：favicon、apple-touch-icon 180、192/512、maskable，白底；
-│                               圖案係 De Stijl「形品科技」嘅 Mondrian 式幾何 mark，由
-│                               tools/render_icons.py 以向量幾何繪製，source-mark.svg 係同一組幾何嘅
-│                               SVG 參考版；build.py 淨係複製 png/ico）
+│                               由 tools/render_icons.py 用 destijl_logo.png 裁出嘅 mark 渲染，
+│                               唔用「de stijl」字同「形品科技」；build.py 淨係複製 png/ico）
 ├── tools/
 │   └── render_icons.py       ← 重新生成 assets/icons（需要 Pillow；build.py 本身唔需要）
 ├── build.py                  ← 建置腳本：讀 src/ + assets/，輸出 dist/index.html + icons/ + manifest.json
