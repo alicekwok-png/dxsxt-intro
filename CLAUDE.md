@@ -15,8 +15,12 @@
 │   ├── hero.jpg / roadmap.jpg          （原 PDF 抽出嘅 AI 渲染圖）
 │   ├── pillar.jpg / bank.jpg / engine.jpg / contract.jpg   （之後生成補充嘅機制配圖）
 │   ├── logo/mark_crop.png / logo/wordmark_white_crop.png   （官方 logo，已去透明邊）
-│   └── icons/                （web app icon：favicon、apple-touch-icon 180、192/512、maskable，
-│                               由 logo/mark.png 用 Pillow 預先渲染，白底；build.py 淨係複製）
+│   └── icons/                （web app icon：favicon、apple-touch-icon 180、192/512、maskable，白底；
+│                               圖案係 De Stijl「形品科技」嘅 Mondrian 式幾何 mark，由
+│                               tools/render_icons.py 以向量幾何繪製，source-mark.svg 係同一組幾何嘅
+│                               SVG 參考版；build.py 淨係複製 png/ico）
+├── tools/
+│   └── render_icons.py       ← 重新生成 assets/icons（需要 Pillow；build.py 本身唔需要）
 ├── build.py                  ← 建置腳本：讀 src/ + assets/，輸出 dist/index.html + icons/ + manifest.json
 ├── dist/
 │   ├── index.html            ← 建置產出，呢個先係最終部署/發布嘅檔案，唔好手動改

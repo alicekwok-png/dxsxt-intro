@@ -193,9 +193,9 @@ print(f"Built {OUT} ({len(page):,} bytes)")
 ICONS_SRC = ASSETS / "icons"
 ICONS_OUT = OUT.parent / "icons"
 ICONS_OUT.mkdir(parents=True, exist_ok=True)
-for f in ICONS_SRC.iterdir():
-    if f.is_file():
-        shutil.copyfile(f, ICONS_OUT / f.name)
+icon_files = [f for f in ICONS_SRC.iterdir() if f.suffix in (".png", ".ico")]
+for f in icon_files:
+    shutil.copyfile(f, ICONS_OUT / f.name)
 
 manifest = {
     "name": "DxSxT Network",
