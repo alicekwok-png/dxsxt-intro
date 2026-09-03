@@ -216,4 +216,4 @@ manifest = {
 (OUT.parent / "manifest.json").write_text(
     json.dumps(manifest, ensure_ascii=False, indent=2) + NL, encoding="utf-8"
 )
-print(f"Copied {len(list(ICONS_SRC.iterdir()))} icons to {ICONS_OUT} and wrote manifest.json")
+print(f"Copied {len(icon_files)} icons to {ICONS_OUT} and wrote manifest.json")
