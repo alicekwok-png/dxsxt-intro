@@ -15,9 +15,18 @@ open dist/index.html   # or just double-click it
 
 `build.py` reads `src/index_template.html`, injects the images from
 `assets/` as base64 data URIs plus a few hand-authored inline SVG charts,
-and writes a single self-contained `dist/index.html` — ready to open
-directly or deploy to any static host (GitHub Pages, Netlify, Vercel, S3,
-etc.). No dependencies beyond the Python standard library.
+wraps the result in a full HTML document (`lang="zh-Hans"`,
+`translate="no"`, charset, viewport) and writes a single self-contained
+`dist/index.html` — ready to open directly or deploy to any static host
+(GitHub Pages, Netlify, Vercel, S3, etc.). No dependencies beyond the
+Python standard library.
+
+The `lang` / `translate="no"` declaration matters: without it, mobile
+browsers may auto-translate the Simplified Chinese copy into garbled
+Traditional Chinese.
+
+Live deployment: https://dxsxt-intro.onrender.com (Render static site
+serving `dist/`).
 
 ## Project layout
 

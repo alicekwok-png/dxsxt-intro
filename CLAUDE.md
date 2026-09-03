@@ -36,6 +36,19 @@ python3 build.py
 唔需要額外靜態資源），可以直接開喺瀏覽器，或者部署去任何靜態網站託管（GitHub Pages、
 Netlify、Vercel 等等）。
 
+`src/index_template.html` 本身係一個冇 `<html>/<head>/<body>` 嘅 fragment；`build.py`
+會將佢包成完整文件，並加上 `<html lang="zh-Hans" translate="no">`、charset、viewport
+同 `notranslate` meta。**呢層 wrapper 唔可以刪**：之前部署去 Render 時因為冇 `lang`
+宣告，iOS Safari 自動將簡體翻譯成繁體，出現「間歇調用引擎」「慷慨 × 商人 × 玩家」呢類
+亂譯（2026-09-03 用戶截圖反映）。如果用戶再報告網頁文案「變咗」但 repo 入面係啱嘅，
+先檢查係咪瀏覽器翻譯功能所致。
+
+## 部署
+
+而家實際上線嘅網址係 **https://dxsxt-intro.onrender.com**（Render 靜態網站，伺服
+`dist/index.html`）。push 去 GitHub `main` 後 Render 會重新部署；Cloudflare 有 5 分鐘
+cache（`s-maxage=300`），改完可能要等幾分鐘先見到。
+
 ## 呢個網頁嘅背景
 
 - 呢份簡報係俾投資者睇嘅募資材料，唔係一般 marketing landing page，所以文案風格要

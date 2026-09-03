@@ -2,10 +2,15 @@
 """Build script for the DxSxT Network landing page.
 
 Reads src/index_template.html (a raw HTML fragment with __TOKEN__
-placeholders — no <!doctype>/<html>/<head>/<body>, since it is designed
-to be embedded by a page wrapper), injects base64-encoded images from
-assets/ plus a few hand-generated inline SVG charts, and writes the
-finished, self-contained page to dist/index.html.
+placeholders — no <!doctype>/<html>/<head>/<body>), injects base64-encoded
+images from assets/ plus a few hand-generated inline SVG charts, wraps the
+result in a full HTML document (lang="zh-Hans", translate="no", charset,
+viewport) and writes the finished, self-contained page to dist/index.html.
+
+The document wrapper matters for static hosting (Render, GitHub Pages…):
+without <html lang> browsers cannot tell the page is Simplified Chinese and
+mobile Safari / Chrome may auto-translate it into garbled Traditional
+Chinese. translate="no" + the notranslate meta tell them not to.
 
 Usage:
     python3 build.py
@@ -141,6 +146,28 @@ remaining = [k for k in repl if k in base]
 if remaining:
     raise SystemExit(f"Unreplaced tokens left in output: {remaining}")
 
+# ---------- wrap the fragment in a full HTML document ----------
+# The template starts with <title> + one <style> block (head content); everything
+# after the first </style> is body content.
+head_end = base.index("</style>") + len("</style>")
+head_part, body_part = base[:head_end], base[head_end:]
+NL = chr(10)
+page = NL.join([
+    "<!doctype html>",
+    '<html lang="zh-Hans" translate="no">',
+    "<head>",
+    '<meta charset="utf-8">',
+    '<meta name="viewport" content="width=device-width, initial-scale=1">',
+    '<meta name="google" content="notranslate">',
+    '<meta http-equiv="Content-Language" content="zh-Hans">',
+    head_part,
+    "</head>",
+    "<body>" + body_part,
+    "</body>",
+    "</html>",
+    "",
+])
+
 OUT.parent.mkdir(parents=True, exist_ok=True)
-OUT.write_text(base, encoding="utf-8")
-print(f"Built {OUT} ({len(base):,} bytes)")
+OUT.write_text(page, encoding="utf-8")
+print(f"Built {OUT} ({len(page):,} bytes)")
