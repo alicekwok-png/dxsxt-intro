@@ -17,11 +17,11 @@
 │   ├── logo/mark_crop.png / logo/wordmark_white_crop.png   （官方 logo，已去透明邊）
 │   └── icons/                （web app icon：favicon、apple-touch-icon 180、192/512、maskable，
 │                               由 logo/mark.png 用 Pillow 預先渲染，白底；build.py 淨係複製）
-├── build.py                  ← 建置腳本：讀 src/ + assets/，輸出 dist/index.html + icons/ + site.webmanifest
+├── build.py                  ← 建置腳本：讀 src/ + assets/，輸出 dist/index.html + icons/ + manifest.json
 ├── dist/
 │   ├── index.html            ← 建置產出，呢個先係最終部署/發布嘅檔案，唔好手動改
 │   ├── icons/                ← 由 assets/icons 複製
-│   └── site.webmanifest      ← build.py 生成（PWA manifest，主畫面 icon / 名稱 / 主題色）
+│   └── manifest.json      ← build.py 生成（PWA manifest，主畫面 icon / 名稱 / 主題色）
 └── docs/
     └── video-storyboard.md   ← 120秒宣傳片分鏡腳本（另一份周邊產出，唔屬於網頁本身）
 ```

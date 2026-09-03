@@ -167,7 +167,7 @@ page = NL.join([
     '<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">',
     '<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">',
     '<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">',
-    '<link rel="manifest" href="site.webmanifest">',
+    '<link rel="manifest" href="manifest.json">',
     '<meta name="application-name" content="DxSxT Network">',
     '<meta name="apple-mobile-web-app-title" content="DxSxT Network">',
     '<meta name="apple-mobile-web-app-capable" content="yes">',
@@ -213,7 +213,7 @@ manifest = {
         {"src": "icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"},
     ],
 }
-(OUT.parent / "site.webmanifest").write_text(
+(OUT.parent / "manifest.json").write_text(
     json.dumps(manifest, ensure_ascii=False, indent=2) + NL, encoding="utf-8"
 )
-print(f"Copied {len(list(ICONS_SRC.iterdir()))} icons to {ICONS_OUT} and wrote site.webmanifest")
+print(f"Copied {len(list(ICONS_SRC.iterdir()))} icons to {ICONS_OUT} and wrote manifest.json")
