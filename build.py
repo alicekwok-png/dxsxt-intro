@@ -16,6 +16,8 @@ Usage:
     python3 build.py
 """
 import base64
+import json
+import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -160,6 +162,17 @@ page = NL.join([
     '<meta name="viewport" content="width=device-width, initial-scale=1">',
     '<meta name="google" content="notranslate">',
     '<meta http-equiv="Content-Language" content="zh-Hans">',
+    # ---- web app icons (files copied into dist/icons/ below) ----
+    '<link rel="icon" href="icons/favicon.ico" sizes="16x16 32x32 48x48">',
+    '<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">',
+    '<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">',
+    '<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">',
+    '<link rel="manifest" href="site.webmanifest">',
+    '<meta name="application-name" content="DxSxT Network">',
+    '<meta name="apple-mobile-web-app-title" content="DxSxT Network">',
+    '<meta name="apple-mobile-web-app-capable" content="yes">',
+    '<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">',
+    '<meta name="theme-color" content="#050810">',
     head_part,
     "</head>",
     "<body>" + body_part,
@@ -171,3 +184,36 @@ page = NL.join([
 OUT.parent.mkdir(parents=True, exist_ok=True)
 OUT.write_text(page, encoding="utf-8")
 print(f"Built {OUT} ({len(page):,} bytes)")
+
+# ---------- web app icons + manifest ----------
+# Icons are pre-rendered from assets/logo/mark.png into assets/icons/ (see
+# git history for the Pillow one-liner); here we only copy them so the build
+# stays dependency-free. iOS ignores PNG transparency for home-screen icons,
+# so the touch/manifest icons carry a white background like the official logo.
+ICONS_SRC = ASSETS / "icons"
+ICONS_OUT = OUT.parent / "icons"
+ICONS_OUT.mkdir(parents=True, exist_ok=True)
+for f in ICONS_SRC.iterdir():
+    if f.is_file():
+        shutil.copyfile(f, ICONS_OUT / f.name)
+
+manifest = {
+    "name": "DxSxT Network",
+    "short_name": "DxSxT",
+    "description": "DxSxT Network — RWA × GameFi × Ad Revenue investor presentation",
+    "lang": "zh-Hans",
+    "start_url": "./",
+    "scope": "./",
+    "display": "standalone",
+    "background_color": "#050810",
+    "theme_color": "#050810",
+    "icons": [
+        {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png"},
+        {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png"},
+        {"src": "icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"},
+    ],
+}
+(OUT.parent / "site.webmanifest").write_text(
+    json.dumps(manifest, ensure_ascii=False, indent=2) + NL, encoding="utf-8"
+)
+print(f"Copied {len(list(ICONS_SRC.iterdir()))} icons to {ICONS_OUT} and wrote site.webmanifest")
