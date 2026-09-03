@@ -27,32 +27,32 @@ base = SRC.read_text(encoding="utf-8")
 
 # ---------- RWA log-scale bar chart ----------
 chart_rwa = '''
-<svg viewBox="0 0 520 200" role="img" aria-label="RWA 代幣化資產規模：2026年中314億美元，2030年預測16兆美元，2034年預測30兆美元">
+<svg viewBox="0 0 520 200" role="img" aria-label="RWA 代币化资产规模：2026年中314亿美元，2030年预测16兆美元，2034年预测30兆美元">
   <g font-family="IBM Plex Mono, monospace">
     <line x1="110" y1="12" x2="110" y2="185" stroke="#22304f" stroke-width="1"></line>
     <!-- row 1: 2026 actual -->
     <text x="0" y="34" fill="#aeb8d1" font-size="11">2026 年中</text>
-    <text x="0" y="46" fill="#6d7791" font-size="9">實際 ACTUAL</text>
-    <rect x="110" y="24" width="47" height="24" rx="6" fill="#4f8dff"><title>2026年中實際規模：約314億美元（扣除穩定幣）</title></rect>
+    <text x="0" y="46" fill="#6d7791" font-size="9">实际 ACTUAL</text>
+    <rect x="110" y="24" width="47" height="24" rx="6" fill="#4f8dff"><title>2026年中实际规模：约314亿美元（扣除稳定币）</title></rect>
     <text x="165" y="41" fill="#f4f6fb" font-size="13" font-weight="600">$31.4B</text>
 
     <!-- row 2: 2030 forecast BCG -->
     <text x="0" y="99" fill="#aeb8d1" font-size="11">2030</text>
-    <text x="0" y="111" fill="#6d7791" font-size="9">BCG 預測</text>
-    <rect x="110" y="89" width="304" height="24" rx="6" fill="#4f8dff" opacity=".45" stroke="#4f8dff" stroke-width="1" stroke-dasharray="3 3"><title>波士頓諮詢公司（BCG）預測2030年市場總規模達16兆美元</title></rect>
+    <text x="0" y="111" fill="#6d7791" font-size="9">BCG 预测</text>
+    <rect x="110" y="89" width="304" height="24" rx="6" fill="#4f8dff" opacity=".45" stroke="#4f8dff" stroke-width="1" stroke-dasharray="3 3"><title>波士顿咨询公司（BCG）预测2030年市场总规模达16兆美元</title></rect>
     <text x="422" y="106" fill="#f4f6fb" font-size="13" font-weight="600">$16T</text>
 
     <!-- row 3: 2034 forecast StanChart -->
     <text x="0" y="164" fill="#aeb8d1" font-size="11">2034</text>
-    <text x="0" y="176" fill="#6d7791" font-size="9">渣打預測</text>
-    <rect x="110" y="154" width="330" height="24" rx="6" fill="#4f8dff" opacity=".45" stroke="#4f8dff" stroke-width="1" stroke-dasharray="3 3"><title>渣打銀行（Standard Chartered）預測2034年市場總規模達30兆美元</title></rect>
+    <text x="0" y="176" fill="#6d7791" font-size="9">渣打预测</text>
+    <rect x="110" y="154" width="330" height="24" rx="6" fill="#4f8dff" opacity=".45" stroke="#4f8dff" stroke-width="1" stroke-dasharray="3 3"><title>渣打银行（Standard Chartered）预测2034年市场总规模达30兆美元</title></rect>
     <text x="448" y="171" fill="#f4f6fb" font-size="13" font-weight="600">$30T</text>
 
     <g>
       <rect x="0" y="192" width="9" height="9" fill="#4f8dff"></rect>
-      <text x="14" y="200" fill="#6d7791" font-size="9">現況 Actual</text>
+      <text x="14" y="200" fill="#6d7791" font-size="9">现况 Actual</text>
       <rect x="90" y="192" width="9" height="9" fill="#4f8dff" opacity=".45" stroke="#4f8dff" stroke-dasharray="2 2"></rect>
-      <text x="104" y="200" fill="#6d7791" font-size="9">第三方預測 Forecast</text>
+      <text x="104" y="200" fill="#6d7791" font-size="9">第三方预测 Forecast</text>
     </g>
   </g>
 </svg>
@@ -60,24 +60,24 @@ chart_rwa = '''
 
 # ---------- GameFi linear bar chart ----------
 chart_gamefi = '''
-<svg viewBox="0 0 520 160" role="img" aria-label="Web3遊戲市場總市值：2024年318億美元，2036年預測2181億美元">
+<svg viewBox="0 0 520 160" role="img" aria-label="Web3游戏市场总市值：2024年318亿美元，2036年预测2181亿美元">
   <g font-family="IBM Plex Mono, monospace">
     <line x1="110" y1="12" x2="110" y2="145" stroke="#22304f" stroke-width="1"></line>
     <text x="0" y="34" fill="#aeb8d1" font-size="11">2024</text>
-    <text x="0" y="46" fill="#6d7791" font-size="9">實際 · +60.5% YoY</text>
-    <rect x="110" y="24" width="48" height="24" rx="6" fill="#1fae82"><title>2024年Web3遊戲代幣總市值：約318億美元，按年+60.5%</title></rect>
+    <text x="0" y="46" fill="#6d7791" font-size="9">实际 · +60.5% YoY</text>
+    <rect x="110" y="24" width="48" height="24" rx="6" fill="#1fae82"><title>2024年Web3游戏代币总市值：约318亿美元，按年+60.5%</title></rect>
     <text x="166" y="41" fill="#f4f6fb" font-size="13" font-weight="600">$31.8B</text>
 
     <text x="0" y="99" fill="#aeb8d1" font-size="11">2036</text>
-    <text x="0" y="111" fill="#6d7791" font-size="9">FMI 預測</text>
-    <rect x="110" y="89" width="330" height="24" rx="6" fill="#1fae82" opacity=".45" stroke="#1fae82" stroke-width="1" stroke-dasharray="3 3"><title>Future Market Insights預測2036年Web3遊戲市場規模達2,181億美元</title></rect>
+    <text x="0" y="111" fill="#6d7791" font-size="9">FMI 预测</text>
+    <rect x="110" y="89" width="330" height="24" rx="6" fill="#1fae82" opacity=".45" stroke="#1fae82" stroke-width="1" stroke-dasharray="3 3"><title>Future Market Insights预测2036年Web3游戏市场规模达2,181亿美元</title></rect>
     <text x="448" y="106" fill="#f4f6fb" font-size="13" font-weight="600">$218.1B</text>
 
     <g>
       <rect x="0" y="132" width="9" height="9" fill="#1fae82"></rect>
-      <text x="14" y="140" fill="#6d7791" font-size="9">現況 Actual</text>
+      <text x="14" y="140" fill="#6d7791" font-size="9">现况 Actual</text>
       <rect x="90" y="132" width="9" height="9" fill="#1fae82" opacity=".45" stroke="#1fae82" stroke-dasharray="2 2"></rect>
-      <text x="104" y="140" fill="#6d7791" font-size="9">第三方預測 Forecast</text>
+      <text x="104" y="140" fill="#6d7791" font-size="9">第三方预测 Forecast</text>
     </g>
   </g>
 </svg>
@@ -85,12 +85,12 @@ chart_gamefi = '''
 
 # ---------- Vesting unlock chart ----------
 steps = [
-    ("TGE", 0, "發行時 · 全數鎖倉"),
-    ("+12mo", 10, "滿一年 · 首次解鎖10%"),
-    ("+14mo", 30, "其後每月 +10%"),
+    ("TGE", 0, "发行时 · 全数锁仓"),
+    ("+12mo", 10, "满一年 · 首次解锁10%"),
+    ("+14mo", 30, "其后每月 +10%"),
     ("+16mo", 50, ""),
     ("+18mo", 70, ""),
-    ("+21mo", 100, "全數解鎖"),
+    ("+21mo", 100, "全数解锁"),
 ]
 slot_w = 880 / 6
 bars = []
@@ -107,13 +107,13 @@ for i, (label, val, note) in enumerate(steps):
     op = 0.35 + 0.65 * (val / 100)
     bars.append(f'''
     <g>
-      <rect x="{cx-bw/2:.1f}" y="{y:.1f}" width="{bw}" height="{h:.1f}" rx="5" fill="#e3ac35" opacity="{op:.2f}"><title>{label}：累計解鎖 {val}% {("· "+note) if note else ""}</title></rect>
+      <rect x="{cx-bw/2:.1f}" y="{y:.1f}" width="{bw}" height="{h:.1f}" rx="5" fill="#e3ac35" opacity="{op:.2f}"><title>{label}：累计解锁 {val}% {("· "+note) if note else ""}</title></rect>
       <text x="{cx:.1f}" y="{y-8:.1f}" text-anchor="middle" fill="#f4f6fb" font-size="12" font-weight="600" font-family="IBM Plex Mono, monospace">{val}%</text>
       <text x="{cx:.1f}" y="188" text-anchor="middle" fill="#aeb8d1" font-size="10.5" font-family="IBM Plex Mono, monospace">{label}</text>
     </g>''')
 
 chart_vesting = f'''
-<svg viewBox="0 0 1000 205" role="img" aria-label="代幣解鎖時間表：發行滿一年解鎖10%，其後每月解鎖10%直至100%">
+<svg viewBox="0 0 1000 205" role="img" aria-label="代币解锁时间表：发行满一年解锁10%，其后每月解锁10%直至100%">
   <g>{''.join(grid)}</g>
   <line x1="60" y1="170" x2="940" y2="170" stroke="#22304f" stroke-width="1"></line>
   {''.join(bars)}
