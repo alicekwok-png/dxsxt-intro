@@ -108,44 +108,19 @@ cache（`s-maxage=300`），改完可能要等幾分鐘先見到。
 7. 網頁已經移除咗原本 PDF 入面嘅 Team 同 CTA/Contact 兩個章節（用戶明確話唔要），
    如果要加返，需要用戶重新確認先好加。
 
-## 待辦：加入項目簡介短片（已同用戶敲定位置同做法）
+## 項目簡介短片（已完成，2026-09-04）
 
-用戶手上有一條項目簡介短片，**確定要加入網站**。以下係已經決定咗嘅嘢，唔使再問用戶：
+短片已經加入網站：`<section id="film">`，位置係 Hero 之後、Problem 之前（用戶敲定嘅位置，
+理由係條片係「痛點 → 方案 → 募資」嘅濃縮版，適合擺最前做 TL;DR）。nav 有「影片 VIDEO」連結。
 
-**位置：** Hero section 之後、Problem section（`<section id="problem">`）之前，做一個獨立 section。
-理由：條片係「痛點 → 方案 → 募資」嘅完整敘事，即係成個網頁嘅濃縮版，適合擺最前做 TL;DR，
-俾投資人（尤其非 crypto 背景嗰啲）先睇片再決定讀唔讀落去。
+**做法係自家托管，唔係 YouTube iframe**：用戶直接俾咗片檔（`DxSxT.mp4`，HEVC 1440p、138MB），
+轉做 H.264 1080p 放喺 `assets/video/`，build.py 複製去 `dist/media/`，頁面用原生 `<video controls
+preload="metadata" playsinline poster="media/poster.jpg">` 播放。Render 支援 byte-range，拖時間軸
+正常。標題「两分钟看懂 DxSxT Network / DxSxT Network in Two Minutes」，下面一句中英簡介。
+用戶明確唔要「1080P · 1:49 · 中文旁白 · 中英字幕」呢類格式／時長描述行，唔好加返。
 
-**做法（睇部署目標揀）：**
-
-1. **GitHub Pages / 任何正常靜態託管** → 用 responsive 16:9 iframe embed（YouTube / Vimeo）。
-   CSP 冇限制，直接得。參考 markup（`src/index_template.html` 入面加，配合對應 CSS）：
-
-   ```html
-   <section id="film" class="tight">
-     <div class="wrap">
-       <div class="eyebrow">項目簡介 · WATCH THE FILM</div>
-       <h2 class="title">用两分钟看懂 DxSxT Network<span class="en">The Model in Two Minutes</span></h2>
-       <div class="film-frame">
-         <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="DxSxT Network 项目简介"
-                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
-       </div>
-     </div>
-   </section>
-   ```
-
-   ```css
-   .film-frame{position:relative; width:100%; max-width:960px; margin:32px auto 0; aspect-ratio:16/9;
-     border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--surface-1);}
-   .film-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
-   ```
-
-2. **Claude Artifact 版本** → Artifact 有 CSP 限制，外部 iframe **好可能會被 block**（未實測）。
-   如果 embed 出唔到畫面，就改用 fallback：一張封面圖（`assets/` 揀一張，或者攞條片其中一格）
-   + 一個「▶ 观看项目简介 · 2 min」按鈕連去 YouTube，視覺上一樣係個影片區。
-
-**文案規矩照舊**：中英雙語、簡體中文＋普通話書面語、唔好用誇張推銷語氣。
+如果將來要改用 Artifact 發布（Artifact CSP 唔容許外部 iframe，亦未必容許外部 mp4），fallback
+係封面圖 + 「观看项目简介」按鈕連去片嘅公開網址。
 
 ## Artifact 發布（呢個 repo 之外嘅發布流程）
 
