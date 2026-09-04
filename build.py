@@ -197,6 +197,16 @@ icon_files = [f for f in ICONS_SRC.iterdir() if f.suffix in (".png", ".ico")]
 for f in icon_files:
     shutil.copyfile(f, ICONS_OUT / f.name)
 
+# ---------- video (served as files, not inlined) ----------
+VIDEO_SRC = ASSETS / "video"
+MEDIA_OUT = OUT.parent / "media"
+if VIDEO_SRC.exists():
+    MEDIA_OUT.mkdir(parents=True, exist_ok=True)
+    media_files = [f for f in VIDEO_SRC.iterdir() if f.suffix in (".mp4", ".webm", ".jpg", ".vtt")]
+    for f in media_files:
+        shutil.copyfile(f, MEDIA_OUT / f.name)
+    print(f"Copied {len(media_files)} media files to {MEDIA_OUT}")
+
 manifest = {
     "name": "DxSxT Network",
     "short_name": "DxSxT",

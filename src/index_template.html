@@ -125,6 +125,18 @@
   .btn.ghost{background:transparent; color:var(--ink-0); border:1px solid var(--line);}
   .btn.ghost:hover{background:var(--surface-2); border-color:var(--ink-1); transform:translateY(-2px);}
 
+  /* ---------- film ---------- */
+  #film{padding:88px 0;}
+  .film-head{display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap;}
+  .film-head .lede{margin-top:14px;}
+  .film-meta{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-2); letter-spacing:.06em; white-space:nowrap;}
+  .film-frame{
+    margin-top:32px; border-radius:18px; overflow:hidden; background:#000;
+    border:1px solid var(--line); box-shadow:var(--shadow);
+  }
+  .film-frame video{display:block; width:100%; height:auto; aspect-ratio:16/9; background:#000;}
+  @media (max-width:640px){ #film{padding:64px 0;} .film-frame{border-radius:12px;} }
+
   /* ---------- hero ---------- */
   #hero{
     padding:0; border-bottom:1px solid var(--line-soft); min-height:100vh;
@@ -303,6 +315,7 @@
       </div>
     </div>
     <nav class="links">
+      <a href="#film">影片 VIDEO</a>
       <a href="#vision">愿景 VISION</a>
       <a href="#market">市场 MARKET</a>
       <a href="#mechanism">机制 MECHANISM</a>
@@ -328,6 +341,26 @@
       <div class="item"><div class="num">国债支撑</div><div class="lab">Backed by Government Bonds</div></div>
       <div class="item"><div class="num">多重销毁通缩</div><div class="lab">Dual-Burn Deflationary Design</div></div>
       <div class="item"><div class="num">US$5,000,000</div><div class="lab">Current Round · Now Open</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FILM ================= -->
+<section id="film">
+  <div class="wrap">
+    <div class="film-head">
+      <div>
+        <div class="eyebrow">宣传片 · THE FILM</div>
+        <h2 class="title">两分钟看懂 DxSxT Network<span class="en">DxSxT Network in Two Minutes</span></h2>
+        <p class="lede wide">GameFi 的通胀死结、国债与实体收益的双引擎、多重销毁机制，以及本轮募资安排——由虚拟主持人逐一讲解。<br><span style="color:var(--ink-2); font-size:14px;">The GameFi inflation trap, the bond-plus-business dual engine, the multi-burn mechanism and this funding round — walked through by our virtual presenter.</span></p>
+      </div>
+      <div class="film-meta">1080P · 1:49 · 中文旁白 · 中英字幕</div>
+    </div>
+    <div class="film-frame">
+      <video controls preload="metadata" playsinline poster="media/poster.jpg">
+        <source src="media/dxsxt-intro-1080p.mp4" type="video/mp4">
+        您的浏览器不支持内嵌视频。<a href="media/dxsxt-intro-1080p.mp4">下载视频 Download the video</a>
+      </video>
     </div>
   </div>
 </section>

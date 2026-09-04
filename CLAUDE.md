@@ -21,12 +21,16 @@
 │                               192/512、maskable 用**完整 logo**（連「de stijl」字，用戶 2026-09-04
 │                               明確要求）；16/32/ico 細 favicon 太細，只用左邊幾何 mark；
 │                               build.py 淨係複製 png/ico）
+│   └── video/                （宣傳片網頁版 dxsxt-intro-1080p.mp4 + poster.jpg。原片係用戶俾嘅
+│                               DxSxT.mp4（HEVC 1440p、138MB，瀏覽器唔支援 HEVC 兼超 GitHub 100MB），
+│                               用 ffmpeg 轉做 H.264 1080p CRF23 faststart；換片時跟返同一設定）
 ├── tools/
 │   └── render_icons.py       ← 重新生成 assets/icons（需要 Pillow；build.py 本身唔需要）
 ├── build.py                  ← 建置腳本：讀 src/ + assets/，輸出 dist/index.html + icons/ + manifest.json
 ├── dist/
 │   ├── index.html            ← 建置產出，呢個先係最終部署/發布嘅檔案，唔好手動改
 │   ├── icons/                ← 由 assets/icons 複製
+│   ├── media/                ← 由 assets/video 複製（影片唔會 base64 內嵌，index.html 用相對路徑引用）
 │   └── manifest.json      ← build.py 生成（PWA manifest，主畫面 icon / 名稱 / 主題色）
 └── docs/
     └── video-storyboard.md   ← 120秒宣傳片分鏡腳本（另一份周邊產出，唔屬於網頁本身）
