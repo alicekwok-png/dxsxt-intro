@@ -212,6 +212,12 @@
   @media (max-width:860px){ .charts-row{grid-template-columns:1fr;} }
 
   /* ---------- mechanism ---------- */
+  .engine-diagram{margin-top:44px; display:flex; justify-content:center;}
+  .engine-diagram svg{width:100%; max-width:920px; height:auto;}
+  @media (max-width:720px){
+    .engine-diagram{overflow-x:auto; justify-content:flex-start;}
+    .engine-diagram svg{min-width:660px;}
+  }
   .mech-visual{display:flex; align-items:center; justify-content:center; padding:20px 0 8px;}
   .mech-visual img{width:200px; max-width:60%; opacity:.92; filter:drop-shadow(0 20px 40px rgba(31,174,130,.16));}
   .tier-row{display:flex; gap:14px; margin-top:22px; flex-wrap:wrap;}
@@ -308,8 +314,8 @@
 <section id="hero">
   <div class="wrap hero-inner">
     <div class="hero-eyebrow"><span>全新的金融概念</span><span class="en">· NEXT-GEN FINANCE</span></div>
-    <h1 class="hero-h1">MINIMIZED RISK.<br>MAXIMIZED RETURNS.</h1>
-    <div class="hero-sub">RWA × GameFi × Ad Revenue<span class="zh">真实世界资产（RWA）× GameFi × 项目核心广告收益──一个由国债支撑的永续游戏经济板块</span></div>
+    <h1 class="hero-h1">MINIMIZED RISK.<br>REAL YIELD.</h1>
+    <div class="hero-sub">RWA × GameFi × Web2 Revenue<span class="zh">真实世界资产（RWA）× GameFi × Web2 实体业务──一个由国债与实体收益双引擎支撑的永续游戏经济板块</span></div>
     <div class="hero-tagline">以国债为底座 · 由实体商业驱动增长 · Web2.5 混合型资产</div>
     <div class="hero-actions">
       <a href="#vision" class="btn">了解投资机会 Explore the Opportunity</a>
@@ -343,8 +349,10 @@
 <section id="vision">
   <div class="wrap">
     <div class="eyebrow">愿景 · THE VISION</div>
-    <h2 class="title">一个由真实资产支撑的平行世界<span class="en">A World Built on Real Value, Not Printed Promises</span></h2>
+    <h2 class="title">双引擎混合型经济体<span class="en">Two Engines. One Economy.</span></h2>
     <div class="vision-copy">
+      <p class="zh">Web3 RWA 国债打底，提供不受游戏周期影响的稳定收益；Web2 实体业务造血，令回购力度随业务增长而扩大。两条真实现金流同时注入同一个代币经济系统——这就是 DxSxT Network 与一般 GameFi 项目的根本分别。</p>
+      <p>Web3 RWA government bonds provide the floor: steady yield that does not move with the game cycle. Web2 operating businesses provide the growth: buyback capacity that scales as the business scales. Two real cash flows feeding one token economy — that is what separates DxSxT Network from a typical GameFi project.</p>
       <p class="zh">想象一个永远不会枯竭的游戏经济 —— 玩家每一次进入游戏，背后都连结着存放在持牌机构的真实国债。他们赢得的不是凭空印出来的代币，而是一个持续产生现金流的实体资产组合带来的真实回报。这个组合每一分钟都在运作：利息进账、代币回购、供应销毁、价格获得支撑 —— 一个自我维持的永动引擎，不靠新玩家的钱养旧玩家，而是靠国债的真实利息支撑整个生态。</p>
       <p>Picture a game economy that never runs dry. Every time a player steps into the game, it's tied to real government bonds sitting inside a licensed custodian's vault. What they earn isn't printed from nothing — it's real yield from a cash-generating asset pool that works every minute of every day: interest lands, tokens get bought back, supply burns, the price floor holds. A self-sustaining engine funded by Treasury yield, not by the next player's deposit — powering the entire ecosystem beneath it.</p>
       <p class="zh">这个不是又一个 GameFi 代币，而是一个有实体资产底层的金融基建 —— 游戏，只不过是它面向十亿手机用户的入口。</p>
@@ -526,6 +534,49 @@
     <div class="eyebrow">核心机制 · THE MECHANISM</div>
     <h2 class="title">多重销毁引擎，持续运转<span class="en">The Non-Stop Dual-Burn Engine</span></h2>
     <p class="lede wide">系统形成双重销毁机制：外部由「RWA 利息回购销毁」和「多条 Web2 产品收益回购销毁」，内部由「玩家升级与维修设备消耗销毁」——多重力量叠加，令代币供给持续通缩。</p>
+
+    <div class="engine-diagram">
+      <svg viewBox="0 0 1000 418" role="img" aria-labelledby="engtitle engdesc">
+        <title id="engtitle">双引擎回购造血架构</title>
+        <desc id="engdesc">引擎一为 RWA 国债，每月固定利息注入；引擎二为 Web2 实体业务，商业利润按比例注入。两条现金流同时进入二级市场回购与销毁，令代币供给持续通缩、价格获得底部支撑。</desc>
+        <defs>
+          <marker id="arrGold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#e3ac35"></path>
+          </marker>
+        </defs>
+
+        <!-- engine 1 -->
+        <rect x="40" y="18" width="420" height="98" rx="14" fill="#0b1020" stroke="#4f8dff" stroke-opacity=".55"></rect>
+        <text x="64" y="48" fill="#4f8dff" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.6">ENGINE 01</text>
+        <text x="64" y="77" fill="#f4f6fb" font-family="Noto Sans TC, sans-serif" font-size="20" font-weight="700">引擎一 · RWA 国债</text>
+        <text x="64" y="101" fill="#aeb8d1" font-family="Noto Sans TC, sans-serif" font-size="13.5">提供安全护城河 · Downside protection</text>
+
+        <!-- engine 2 -->
+        <rect x="540" y="18" width="420" height="98" rx="14" fill="#0b1020" stroke="#1fae82" stroke-opacity=".55"></rect>
+        <text x="564" y="48" fill="#1fae82" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.6">ENGINE 02</text>
+        <text x="564" y="77" fill="#f4f6fb" font-family="Noto Sans TC, sans-serif" font-size="20" font-weight="700">引擎二 · Web2 实体业务</text>
+        <text x="564" y="101" fill="#aeb8d1" font-family="Noto Sans TC, sans-serif" font-size="13.5">提供长远成长性 · Growth potential</text>
+
+        <!-- flows -->
+        <path d="M250,116 V190 H500" fill="none" stroke="#4f8dff" stroke-opacity=".7" stroke-width="1.5"></path>
+        <path d="M750,116 V190 H500" fill="none" stroke="#1fae82" stroke-opacity=".7" stroke-width="1.5"></path>
+        <text x="266" y="146" fill="#aeb8d1" font-family="Noto Sans TC, sans-serif" font-size="13.5">每月固定利息注入</text>
+        <text x="266" y="166" fill="#717c98" font-family="IBM Plex Mono, monospace" font-size="11">Monthly bond interest</text>
+        <text x="734" y="146" text-anchor="end" fill="#aeb8d1" font-family="Noto Sans TC, sans-serif" font-size="13.5">商业利润按比例注入</text>
+        <text x="734" y="166" text-anchor="end" fill="#717c98" font-family="IBM Plex Mono, monospace" font-size="11">Share of operating profit</text>
+        <path d="M500,190 V220" fill="none" stroke="#e3ac35" stroke-width="1.8" marker-end="url(#arrGold)"></path>
+
+        <!-- converge -->
+        <rect x="250" y="228" width="500" height="86" rx="14" fill="#121a30" stroke="#e3ac35" stroke-opacity=".6"></rect>
+        <text x="500" y="258" text-anchor="middle" fill="#e3ac35" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.6">OPEN-MARKET BUYBACK &amp; BURN</text>
+        <text x="500" y="290" text-anchor="middle" fill="#f4f6fb" font-family="Noto Sans TC, sans-serif" font-size="21" font-weight="700">二级市场回购与销毁</text>
+
+        <!-- result -->
+        <path d="M500,314 V346" fill="none" stroke="#e3ac35" stroke-width="1.8" marker-end="url(#arrGold)"></path>
+        <text x="500" y="378" text-anchor="middle" fill="#aeb8d1" font-family="Noto Sans TC, sans-serif" font-size="15">代币供给持续通缩 · 价格获得底部支撑</text>
+        <text x="500" y="400" text-anchor="middle" fill="#717c98" font-family="IBM Plex Mono, monospace" font-size="11.5">Supply contracts. The floor holds.</text>
+      </svg>
+    </div>
 
     <div class="grid2" style="margin-top:36px;">
       <div class="card">
