@@ -2,9 +2,11 @@
 """Render the web-app icon set (assets/icons/) from the official De Stijl logo.
 
 Source: assets/logo/destijl_logo.png (the full "de stijl · Technology Network
-int'l · 形品科技" artwork on white). Only the geometric mark on the left is
-used for icons — the wordmark is unreadable at icon sizes. The mark is
-located automatically as the left-most block of non-white columns.
+int'l · 形品科技" artwork on white). Home-screen / PWA icons (180px and up)
+use the complete logo, cropped to its content box, as the user asked. The
+16/32px favicons use only the geometric mark on the left (auto-located as
+the left-most block of non-white columns) because the wordmark is
+unreadable that small.
 
 Usage:  python3 tools/render_icons.py     (needs Pillow; build.py does not)
 """
@@ -21,6 +23,16 @@ WHITE = (255, 255, 255)
 
 def is_ink(px):  # anything clearly darker / more saturated than paper
     return sum(px) < 720
+
+
+def crop_content(logo: Image.Image) -> Image.Image:
+    """Return the whole artwork trimmed to its non-white bounding box."""
+    rgb = logo.convert("RGB")
+    w, h = rgb.size
+    px = rgb.load()
+    xs = [x for x in range(w) if any(is_ink(px[x, y]) for y in range(h))]
+    ys = [y for y in range(h) if any(is_ink(px[x, y]) for x in range(w))]
+    return rgb.crop((min(xs), min(ys), max(xs) + 1, max(ys) + 1))
 
 
 def crop_mark(logo: Image.Image) -> Image.Image:
@@ -63,15 +75,18 @@ def render(mark, size, pad_frac, path, transparent=False):
     return canvas
 
 
-mark = crop_mark(Image.open(LOGO))
+logo = Image.open(LOGO)
+full = crop_content(logo)
+mark = crop_mark(logo)
 mark.save(MARK, optimize=True)
-print(MARK.relative_to(ROOT), mark.size)
+print(MARK.relative_to(ROOT), mark.size, "| full logo", full.size)
 
-render(mark, 180, 0.12, OUT / "apple-touch-icon.png")
-render(mark, 192, 0.12, OUT / "icon-192.png")
-icon512 = render(mark, 512, 0.12, OUT / "icon-512.png")
-render(mark, 512, 0.22, OUT / "icon-512-maskable.png")
+render(full, 180, 0.08, OUT / "apple-touch-icon.png")
+render(full, 192, 0.08, OUT / "icon-192.png")
+icon512 = render(full, 512, 0.08, OUT / "icon-512.png")
+render(full, 512, 0.18, OUT / "icon-512-maskable.png")
 render(mark, 32, 0.04, OUT / "favicon-32.png", transparent=True)
 render(mark, 16, 0.02, OUT / "favicon-16.png", transparent=True)
-icon512.save(OUT / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48)])
+render(mark, 48, 0.06, OUT / "favicon-48.png").save(OUT / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48)])
+(OUT / "favicon-48.png").unlink()
 print("assets/icons/favicon.ico")

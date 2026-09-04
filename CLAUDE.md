@@ -17,9 +17,10 @@
 │   ├── logo/mark_crop.png / logo/wordmark_white_crop.png   （官方 logo，已去透明邊）
 │   ├── logo/destijl_logo.png / destijl_mark.png   （De Stijl「形品科技」官方 logo 原圖，
 │   │                           同由佢自動裁出嘅左邊幾何 mark；mark 係 render_icons.py 生成）
-│   └── icons/                （web app icon：favicon、apple-touch-icon 180、192/512、maskable，白底；
-│                               由 tools/render_icons.py 用 destijl_logo.png 裁出嘅 mark 渲染，
-│                               唔用「de stijl」字同「形品科技」；build.py 淨係複製 png/ico）
+│   └── icons/                （web app icon，白底，由 tools/render_icons.py 渲染：apple-touch-icon 180、
+│                               192/512、maskable 用**完整 logo**（連「de stijl」字，用戶 2026-09-04
+│                               明確要求）；16/32/ico 細 favicon 太細，只用左邊幾何 mark；
+│                               build.py 淨係複製 png/ico）
 ├── tools/
 │   └── render_icons.py       ← 重新生成 assets/icons（需要 Pillow；build.py 本身唔需要）
 ├── build.py                  ← 建置腳本：讀 src/ + assets/，輸出 dist/index.html + icons/ + manifest.json
