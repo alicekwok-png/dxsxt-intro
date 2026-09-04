@@ -46,9 +46,9 @@
 
 **旁白：** 「投資人資金由持牌機構託管，配置在國債這類低風險資產上，這一步是整個系統的根基。」
 
-**Image prompt：** *A tall glowing blue wireframe water-tower / custody vault structure standing on dark ground, low-poly polygonal style, faint holographic bond-certificate icons orbiting the tower, pure black background, cyan-blue glow, particle dust effects, centered symmetrical composition, digital blockchain data visualization aesthetic, high detail, 16:9, no text*
+**Image prompt：** *A tall glowing blue wireframe skyscraper standing on dark ground — a plain, realistic tower silhouette with a flat rooftop. IMPORTANT: no arrow, no arrowhead, no spire, no needle, no antenna, no upward-pointing shape of any kind on top of the building; the roof is flat and ordinary. Low-poly polygonal construction with triangulated facets and glowing node points along the edges. Faint holographic government-bond certificate icons and coin discs float and orbit slowly around the building. Pure black background, cyan-blue glow, fine particle dust, centered symmetrical composition, digital blockchain data-visualization aesthetic, high detail, 16:9, no text*
 
-**Video prompt：** *Slow orbit camera move around the base of the tower; holographic bond icons drift upward and orbit the structure; glow pulses gently once every few seconds; 12 seconds, steady, cinematic*
+**Video prompt：** *Slow orbit camera move around the base of the building; holographic bond icons drift upward and orbit the structure; the glow pulses gently once every few seconds. The building silhouette stays exactly the same throughout — nothing grows, extends or rises from the rooftop, and no arrow or spire ever appears; 12 seconds, steady, cinematic*
 
 ---
 
@@ -144,7 +144,7 @@
 「本輪募資 US$5,000,000 · 現正開放」
 「DxSxT Network」／「MINIMIZED RISK. MAXIMIZED RETURNS.」
 
-**旁白：** 「這一輪募資 500 萬美金，現正開放——歡迎與我們一起，重新設計遊戲經濟的底層邏輯。」
+**旁白：** 「本輪募資 500 萬美元，現正開放——誠邀合作夥伴，共同建立由真實資產支撐的遊戲經濟體系。」
 
 **Image prompt：** *THE HOST (see reference above) standing centered, facing camera directly, delivering a confident closing line; behind them a dark navy fund-allocation bar chart with three colored segments (blue 40%, gold 30%, green 30%) glows softly; dark studio background, minimalist financial dashboard aesthetic, high detail, 16:9, no text on the host*
 

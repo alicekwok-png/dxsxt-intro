@@ -79,10 +79,15 @@ cache（`s-maxage=300`），改完可能要等幾分鐘先見到。
 
 1. **項目名一律「DxSxT Network」**，唔可以寫做「DxST」（呢個係之前改漏過嘅錯字，成個
    repo 搜索一次「DxST」確保冇漏網之魚）。
-2. **「國債」唔好寫做「美國國債」**——除咗 Market Opportunity 嗰兩個引用第三方數據嘅
-   stat tile（「代幣化美國國債產品總值增長 +380%」、「代幣化美國國債平均年化回報
-   4.14%」）本身就係精確引述第三方統計，呢兩處要保留「美國」。其他所有 DxSxT 自己嘅
-   敘述文字一律淨係講「國債」。
+2. **「國債」唔好寫做「美國國債」**，除咗以下兩類例外：
+   (a) Market Opportunity 嗰兩個引用第三方數據嘅 stat tile（「代幣化美國國債產品總值增長
+   +380%」、「代幣化美國國債平均年化回報 4.14%」）本身就係精確引述第三方統計；
+   (b) Vision 章節「持牌機構托管」卡入面**如實披露實際持倉配置**嗰句（「配置于 AAA 級主權
+   債券及美國國債（S&P AA+）」）——呢處要講實係邊種資產，含糊反而唔專業。
+   其他所有 DxSxT 自己嘅敘述文字一律淨係講「國債」。
+   **評級數字要準**：美國主權評級係 S&P AA+ / Fitch AA+ / Moody's Aa1（唔係 AAA，亦都
+   冇「AAA+」呢個級別——AAA 已經係頂，「+/−」由 AA 級先開始用）。評級會變，網頁凡係寫
+   實評級嘅地方都要跟一句「截至 XXXX 年」嘅來源註。
 3. **文案唔用 AI 腔/大廠黑話**：不僅、更是、正如、毋庸置疑、值得一提、深入探討、完美
    融合、維度、矩陣、賦能、破圈、下半場、閉環，呢啲詞一律唔用；亦都唔用浮誇讚美詞
    （「饕餮盛宴」、「震撼來襲」之類）。但**唔好行去另一個極端變成口語化大白話**（唔用
@@ -102,6 +107,45 @@ cache（`s-maxage=300`），改完可能要等幾分鐘先見到。
    呢個/嗰個 等），但同時唔好變成大白話，要維持專業投資簡報語域。
 7. 網頁已經移除咗原本 PDF 入面嘅 Team 同 CTA/Contact 兩個章節（用戶明確話唔要），
    如果要加返，需要用戶重新確認先好加。
+
+## 待辦：加入項目簡介短片（已同用戶敲定位置同做法）
+
+用戶手上有一條項目簡介短片，**確定要加入網站**。以下係已經決定咗嘅嘢，唔使再問用戶：
+
+**位置：** Hero section 之後、Problem section（`<section id="problem">`）之前，做一個獨立 section。
+理由：條片係「痛點 → 方案 → 募資」嘅完整敘事，即係成個網頁嘅濃縮版，適合擺最前做 TL;DR，
+俾投資人（尤其非 crypto 背景嗰啲）先睇片再決定讀唔讀落去。
+
+**做法（睇部署目標揀）：**
+
+1. **GitHub Pages / 任何正常靜態託管** → 用 responsive 16:9 iframe embed（YouTube / Vimeo）。
+   CSP 冇限制，直接得。參考 markup（`src/index_template.html` 入面加，配合對應 CSS）：
+
+   ```html
+   <section id="film" class="tight">
+     <div class="wrap">
+       <div class="eyebrow">項目簡介 · WATCH THE FILM</div>
+       <h2 class="title">用两分钟看懂 DxSxT Network<span class="en">The Model in Two Minutes</span></h2>
+       <div class="film-frame">
+         <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="DxSxT Network 项目简介"
+                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+       </div>
+     </div>
+   </section>
+   ```
+
+   ```css
+   .film-frame{position:relative; width:100%; max-width:960px; margin:32px auto 0; aspect-ratio:16/9;
+     border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--surface-1);}
+   .film-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+   ```
+
+2. **Claude Artifact 版本** → Artifact 有 CSP 限制，外部 iframe **好可能會被 block**（未實測）。
+   如果 embed 出唔到畫面，就改用 fallback：一張封面圖（`assets/` 揀一張，或者攞條片其中一格）
+   + 一個「▶ 观看项目简介 · 2 min」按鈕連去 YouTube，視覺上一樣係個影片區。
+
+**文案規矩照舊**：中英雙語、簡體中文＋普通話書面語、唔好用誇張推銷語氣。
 
 ## Artifact 發布（呢個 repo 之外嘅發布流程）
 
