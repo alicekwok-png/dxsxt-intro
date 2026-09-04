@@ -130,6 +130,11 @@ repl = {
     '__PILLAR_B64__': b64(ASSETS / 'pillar.jpg'),         # Perpetual Floor Support card
     '__LOGO_MARK_B64__': b64(ASSETS / 'logo' / 'mark_crop.png'),
     '__LOGO_WORD_B64__': b64(ASSETS / 'logo' / 'wordmark_white_crop.png'),
+    '__L_BIGX__': b64(ASSETS / 'logo' / 'layer_bigx.png'),   # boot-screen logo layer
+    '__L_SMALLX__': b64(ASSETS / 'logo' / 'layer_smallx.png'),   # boot-screen logo layer
+    '__L_RED__': b64(ASSETS / 'logo' / 'layer_red.png'),   # boot-screen logo layer
+    '__L_YELLOW__': b64(ASSETS / 'logo' / 'layer_yellow.png'),   # boot-screen logo layer
+    '__L_BLUE__': b64(ASSETS / 'logo' / 'layer_blue.png'),   # boot-screen logo layer
     '__CHART_RWA__': chart_rwa,
     '__CHART_GAMEFI__': chart_gamefi,
     '__CHART_VESTING__': chart_vesting,
