@@ -538,13 +538,19 @@
     <p class="lede wide">系统形成双重销毁机制：外部由「RWA 利息回购销毁」和「多条 Web2 产品收益回购销毁」，内部由「玩家升级与维修设备消耗销毁」——多重力量叠加，令代币供给持续通缩。</p>
 
     <div class="engine-diagram">
-      <svg viewBox="0 0 1000 418" role="img" aria-labelledby="engtitle engdesc">
+      <svg viewBox="0 0 1000 442" role="img" aria-labelledby="engtitle engdesc">
         <title id="engtitle">双引擎回购造血架构</title>
         <desc id="engdesc">引擎一为 RWA 国债，每月固定利息注入；引擎二为 Web2 实体业务，商业利润按比例注入。两条现金流同时进入二级市场回购与销毁，令代币供给持续通缩、价格获得底部支撑。</desc>
         <defs>
           <marker id="arrGold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0,0 L10,5 L0,10 z" fill="#e3ac35"></path>
           </marker>
+          <filter id="goldGlow" x="-20%" y="-40%" width="140%" height="180%">
+            <feGaussianBlur stdDeviation="10" result="blur"></feGaussianBlur>
+            <feFlood flood-color="#e3ac35" flood-opacity=".38" result="tint"></feFlood>
+            <feComposite in="tint" in2="blur" operator="in" result="glow"></feComposite>
+            <feMerge><feMergeNode in="glow"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+          </filter>
         </defs>
 
         <!-- engine 1 -->
@@ -566,17 +572,18 @@
         <text x="266" y="166" fill="#717c98" font-family="IBM Plex Mono, monospace" font-size="11">Monthly bond interest</text>
         <text x="734" y="146" text-anchor="end" fill="#aeb8d1" font-family="Noto Sans TC, sans-serif" font-size="13.5">商业利润按比例注入</text>
         <text x="734" y="166" text-anchor="end" fill="#717c98" font-family="IBM Plex Mono, monospace" font-size="11">Share of operating profit</text>
-        <path d="M500,190 V220" fill="none" stroke="#e3ac35" stroke-width="1.8" marker-end="url(#arrGold)"></path>
+        <path d="M500,190 V220" fill="none" stroke="#e3ac35" stroke-width="3" marker-end="url(#arrGold)"></path>
 
-        <!-- converge -->
-        <rect x="250" y="228" width="500" height="86" rx="14" fill="#121a30" stroke="#e3ac35" stroke-opacity=".6"></rect>
-        <text x="500" y="258" text-anchor="middle" fill="#e3ac35" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.6">OPEN-MARKET BUYBACK &amp; BURN</text>
-        <text x="500" y="290" text-anchor="middle" fill="#f4f6fb" font-family="Noto Sans TC, sans-serif" font-size="21" font-weight="700">二级市场回购与销毁</text>
+        <!-- converge — the payoff of the whole diagram -->
+        <rect x="205" y="228" width="590" height="104" rx="16" fill="#2a1f06" stroke="#e3ac35" stroke-width="1.8" filter="url(#goldGlow)"></rect>
+        <text x="500" y="260" text-anchor="middle" fill="#e3ac35" font-family="IBM Plex Mono, monospace" font-size="11.5" letter-spacing="1.8">OPEN-MARKET BUYBACK &amp; BURN</text>
+        <text x="500" y="298" text-anchor="middle" fill="#ffe9b0" font-family="Noto Sans TC, sans-serif" font-size="26" font-weight="700">二级市场回购与销毁</text>
+        <text x="500" y="321" text-anchor="middle" fill="#c9ab63" font-family="IBM Plex Mono, monospace" font-size="11.5">于公开市场执行 · 销毁交易链上可查 · Burn transactions verifiable on-chain</text>
 
         <!-- result -->
-        <path d="M500,314 V346" fill="none" stroke="#e3ac35" stroke-width="1.8" marker-end="url(#arrGold)"></path>
-        <text x="500" y="378" text-anchor="middle" fill="#aeb8d1" font-family="Noto Sans TC, sans-serif" font-size="15">代币供给持续通缩 · 价格获得底部支撑</text>
-        <text x="500" y="400" text-anchor="middle" fill="#717c98" font-family="IBM Plex Mono, monospace" font-size="11.5">Supply contracts. The floor holds.</text>
+        <path d="M500,332 V366" fill="none" stroke="#e3ac35" stroke-width="3" marker-end="url(#arrGold)"></path>
+        <text x="500" y="400" text-anchor="middle" fill="#f4f6fb" font-family="Noto Sans TC, sans-serif" font-size="19" font-weight="600">代币供给持续通缩 · 价格获得底部支撑</text>
+        <text x="500" y="424" text-anchor="middle" fill="#8b96b5" font-family="IBM Plex Mono, monospace" font-size="12">Supply contracts. The floor holds.</text>
       </svg>
     </div>
 
